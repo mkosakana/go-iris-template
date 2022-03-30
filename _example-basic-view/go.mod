@@ -1,4 +1,4 @@
-module _example-basic
+module _example-basic-view
 
 go 1.17
 

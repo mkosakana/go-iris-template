@@ -10,7 +10,7 @@ func main()  {
 	// "_views" ディレクトリ配下の.htmlファイルを返却するように設定
 	app.RegisterView(iris.HTML("./_views", ".html"))
 
-	// GET - "127.0.0.1:8080/"
+	// GET: "127.0.0.1:8080/"
 	app.Get("/", func(ctx iris.Context) {
 		// ファイル内で使用する変数の設定
 		ctx.ViewData("message", "Hello world!")
