@@ -9,7 +9,7 @@ import (
 
 func TestApp(t *testing.T) {
 	app := iris.New()
-	app.RegisterView(iris.HTML("./_views", ".html"))
+	app.RegisterView(iris.HTML("./views", ".html"))
 
 	app.Get("/", func(ctx iris.Context) {
 		ctx.ViewData("message", "Hello world!")
