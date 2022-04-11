@@ -8,13 +8,18 @@ import (
 
 func TestApp(t *testing.T) {
 	app := iris.New()
-	app.Handle("PUT", "/users/{id:string}", updateUser)
+	app.Handle("GET", "/", ping)
+	app.Handle("PUT", "/books/{id:string}", updateBook)
 
 	e := httptest.New(t, app)
-	e.PUT("/users/123").WithJSON(
+	e.GET("/").Expect().
+		Status(httptest.StatusOK).
+		Body().
+		Equal("ping")
+
+	e.PUT("/books/123").WithJSON(
 		iris.Map{
-			"firstname": "Taro",
-			"Lastname": "Yamada",
+			"title": "老人と森",
 		},
 		).Expect().
 		Status(httptest.StatusOK)
