@@ -1,4 +1,4 @@
-package models
+package books
 
 type Response struct {
 	ID      string `json:"id"`
