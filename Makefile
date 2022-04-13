@@ -3,8 +3,8 @@ build: ## Dockerfileをキャッシュを使用せずにビルドします．
 	docker-compose build --no-cache --force-rm
 
 .PHONY: up
-up: ## Dockerfileから作成したコンテナをバックグラウンドで立ち上げます．
-	docker-compose up -d go-iris-sample
+up: ## Dockerfileから作成したコンテナを立ち上げます．
+	docker-compose up go-iris-sample
 
 .PHONY: down
 down: ## コンテナを停止して削除します。
