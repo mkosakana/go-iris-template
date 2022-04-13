@@ -17,7 +17,9 @@
 
 ## 🎟 Install
 
-```go
+### Route1: Install with `Docker`
+
+```shell
 // docker-composeからイメージのビルド
 1. make build
 
@@ -28,11 +30,22 @@
 3. go mod download
 ```
 
+
+### Route2: Install with `go.mod`
+
+1. Download [golang](https://go.dev).  
+
+2. Clone this repository on your working directory.
+```shell
+$ cd $WORK_DIR
+$ git clone https://github.com/mkosakana/go-iris-sample.git
+$ go mod download
+```
+
+
 ## 🦉 Get Start
 
-```go
-// 使うディレクトリまで移動
-cd _example-...
-
-go run main.go
+```shell
+// ホームディレクトリから
+go-iris-sample $ go run main.go
 ```
