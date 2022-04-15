@@ -21,11 +21,11 @@ func main() {
 	// GET: "http://localhost:8080/"
 	app.Handle("GET", "/ping", ping)
 
-	// "http://localhost:8080/users/"から始まるパスを受け取る処理をグループ化
+	// "/users/"から始まるパスを受け取る処理をグループ化
 	users := app.Party("/users")
 	mvc.Configure(users, setUps.ConfigureUsersControllers)
 
-	// "http://localhost:8080/animals/"から始まるパスを受け取る処理をグループ化
+	// "/animals/"から始まるパスを受け取る処理をグループ化
 	animals := app.Party("/animals")
 	mvc.Configure(animals, setUps.ConfigureAnimalsControllers)
 

@@ -50,7 +50,7 @@ func getBook(ctx iris.Context) {
 
 // 本の更新メソッド
 // 入力例
-// PUT: "127.0.0.1:8080/books/104"
+// PUT: "https://localhost:8080/books/104"
 // {
 //		"title": "老人と森",
 // }

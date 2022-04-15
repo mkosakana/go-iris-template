@@ -9,6 +9,7 @@ type AnimalsController struct {
 	Ctx iris.Context
 }
 
+// Get "http://localhost:8080/animals"
 func (c *AnimalsController) Get() mvc.View {
 	var animalsListView = mvc.View{
 		Name: "/animals/list.html",
