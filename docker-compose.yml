@@ -5,6 +5,31 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile
+    command: /bin/sh -c "go run _example-mvc-api/main.go"
+    stdin_open: true
+    tty: true
     volumes:
       - .:/go/src/go-iris-sample
-    tty: true
+    ports:
+      - 8080:8080
+    depends_on:
+      - "db"
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: go_iris_database
+      MYSQL_USER: iris
+      MYSQL_PASSWORD: dfwfnoij
+      TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
+    ports:
+      - 3306:3306
+
+volumes:
+  db-data:
+    driver: local
