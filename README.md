@@ -24,7 +24,8 @@
 ```shell
 $ cd $WORK_DIR
 $ git clone https://github.com/mkosakana/go-iris-sample.git
-$ go mod download
+$ cd go-iris-sample
+$ make install 
 ```
 
 
@@ -38,16 +39,13 @@ $ go run main.go
 ```
 
 
-### Route2: use `/_example-mvc-api`
+### Route2: use `/_example-mvc-api`（`Docker`, DB接続あり）
 
 ```shell
-go-iris-sample $ cd _example-mvc-api
+// go-iris-sample ディレクトリから
 // 1. docker-composeからイメージのビルド
 $ make build
 
-// 2. コンテナーをバックグラウンドで立ち上げ
+// 2. コンテナー・DBをバックグラウンドで立ち上げ
 $ make up
-
-// 3. mod ファイルのダウンロード
-$ go mod download
 ```
