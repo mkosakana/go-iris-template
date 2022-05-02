@@ -15,11 +15,11 @@ var userService service.UserService
 
 // メソッド名でパスの違い・リクエストメソッド・パラメータを受け付けます（超便利）
 // [例]
-// GetList()       GET: "http://localhost:8080/users/list"
-// Post()          POST: "http://localhost:8080/users"
-// PutDetails()    PUT: "http://localhost:8080/users/details"
+// GetList()                GET: "http://localhost:8080/users/list"
+// Post()                   POST: "http://localhost:8080/users"
+// PutDetails()             PUT: "http://localhost:8080/users/details"
 // PutDetailsBy(id uint)    PUT: "http://localhost:8080/users/details/{id:int}"
-// DeleteDetails() DELETE: "http://localhost:8080/users/details"
+// DeleteDetails()          DELETE: "http://localhost:8080/users/details"
 // DeleteDetailsBy(id uint) DELETE: "http://localhost:8080/users/details/{id:int}"
 // [その他の例]
 // POST: http://localhost:8080/users/details/example -> PostDetailsExample()
