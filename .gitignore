@@ -18,4 +18,5 @@
 
 access.log
 
-db
+db/
+tmp/
