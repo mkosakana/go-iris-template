@@ -8,9 +8,9 @@ import (
 
 type UserService struct {}
 
-func (UserService) GetUserList() ([]model.User, error) {
+func (s UserService) GetUserList() ([]model.User, error) {
 	// initialize the DbMap
-	dbMap := InitDb()
+	dbMap := s.InitDb()
 	defer dbMap.Db.Close()
 
 	// ユーザーを全取得
@@ -24,9 +24,9 @@ func (UserService) GetUserList() ([]model.User, error) {
 	return users, nil
 }
 
-func (UserService) CreateUser(user *model.User) error {
+func (s UserService) CreateUser(user *model.User) error {
 	// initialize the DbMap
-	dbMap := InitDb()
+	dbMap := s.InitDb()
 	defer dbMap.Db.Close()
 
 	// トランザクションを走らせながらinsert
@@ -43,9 +43,9 @@ func (UserService) CreateUser(user *model.User) error {
 	return nil
 }
 
-func (UserService) UpdateUser(id int, user *model.User) error {
+func (s UserService) UpdateUser(id int, user *model.User) error {
 	// initialize the DbMap
-	dbMap := InitDb()
+	dbMap := s.InitDb()
 	defer dbMap.Db.Close()
 
 	// トランザクションを走らせながらupdate
@@ -74,9 +74,9 @@ func (UserService) UpdateUser(id int, user *model.User) error {
 	return nil
 }
 
-func (UserService) DeleteUser(id int) error {
+func (s UserService) DeleteUser(id int) error {
 	// initialize the DbMap
-	dbMap := InitDb()
+	dbMap := s.InitDb()
 	defer dbMap.Db.Close()
 
 	// id から削除するユーザーを取得

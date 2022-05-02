@@ -13,9 +13,12 @@ import (
 )
 
 // InitDb gorp初期化処理
-func InitDb() *gorp.DbMap {
+func (s *UserService) InitDb() *gorp.DbMap {
 	// .env ファイルの読み込み
-	loadEnv()
+	err := s.loadEnv()
+	if err != nil {
+		fmt.Printf(".env ファイルの読み込みに失敗しました: %v\n", err)
+	}
 
 	dbUserName := os.Getenv("DB_USERNAME")
 	dbPassWord := os.Getenv("DB_PASSWORD")
@@ -47,10 +50,11 @@ func InitDb() *gorp.DbMap {
 }
 
 // .envファイル内の設定を取得する
-func loadEnv() {
+func (s *UserService) loadEnv() error {
 	// .envファイル全体からDB設定を読み込む
 	err := godotenv.Load(".env")
 	if err != nil {
-		fmt.Printf(".env ファイルの読み込みに失敗しました: %v", err)
+		return err
 	}
+	return nil
 }

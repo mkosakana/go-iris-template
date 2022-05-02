@@ -8,10 +8,9 @@ import (
 )
 
 type UsersController struct {
-	Ctx iris.Context
+	UserService service.UserService
+	Ctx         iris.Context
 }
-
-var userService service.UserService
 
 // メソッド名でパスの違い・リクエストメソッド・パラメータを受け付けます（超便利）
 // [例]
@@ -27,7 +26,7 @@ var userService service.UserService
 
 func (c *UsersController) GetList() mvc.Response {
 	// 一覧取得
-	users, err := userService.GetUserList()
+	users, err := c.UserService.GetUserList()
 	if err != nil {
 		return mvc.Response{
 			Code: iris.StatusInternalServerError,  // エラーハンドリング
@@ -55,7 +54,7 @@ func (c *UsersController) Post() mvc.Response {
 	}
 
 	// 新規作成
-	err = userService.CreateUser(&user)
+	err = c.UserService.CreateUser(&user)
 	if err != nil {
 		return mvc.Response{
 			Code: iris.StatusInternalServerError,  // エラーハンドリング
@@ -80,7 +79,7 @@ func (c *UsersController) PutDetailsBy(id int) mvc.Response {
 	}
 
 	// 更新
-	err = userService.UpdateUser(id, &user)
+	err = c.UserService.UpdateUser(id, &user)
 	if err != nil {
 		return mvc.Response{
 			Code: iris.StatusInternalServerError,  // エラーハンドリング
@@ -93,7 +92,7 @@ func (c *UsersController) PutDetailsBy(id int) mvc.Response {
 
 func (c *UsersController) DeleteDetailsBy(id int) mvc.Response {
 	// 削除
-	err := userService.DeleteUser(id)
+	err := c.UserService.DeleteUser(id)
 	if err != nil {
 		return mvc.Response{
 			Code: iris.StatusInternalServerError,  // エラーハンドリング
