@@ -19,9 +19,9 @@
 
 ## 🎟 Install
 
-1. Download [golang](https://go.dev)
+### 1. Download [golang](https://go.dev)
 
-2. Clone this repository on your working directory
+### 2. Clone this repository on your working directory
 
 ```shell
 $ cd $WORK_DIR
@@ -47,13 +47,13 @@ $ go run main.go
 
 ### Route 2 : With Docker (Data Base connection ✨）
 
-1. 立ち上げるコンテナの指定  
+#### 1. 立ち上げるコンテナの指定  
 
 `.air.toml` ファイル内 `cmd = "go build -o ./tmp/main ./_example-mvc-api/main.go"` の，  
 `"./_example-mvc-api/main.go"` で指定されたディレクトリ（デフォルトでは「_example-mvc-api」）がコンテナとして立ち上がるため，  
 **「_example-mvc-api」** の箇所を Docker を使って作業したいディレクトリ名に置換する．
 
-2. start Docker
+#### 2. start Docker
 
 ```shell
 $ cd go-iris-sample
