@@ -8,7 +8,7 @@ COPY .. /go/src/go-iris-sample/
 COPY .. /usr/local/go/src/
 
 # ワーキングディレクトリの設定
-WORKDIR /go/src/go-iris-sample/
+WORKDIR /go/src/go-iris-sample
 
 # Environment
 ENV LANG C.UTF-8
@@ -17,7 +17,9 @@ ENV TZ Asia/Tokyo
 # package update
 RUN apk update && apk add git
 
-# download packages
+# go.mod パッケージのインストール
+RUN go get github.com/cosmtrek/air@v1.29.0
 RUN go mod download
-RUN cd _example-mvc-api/
-RUN go mod tidy
+
+# ホットリロードの感知
+CMD ["air", "-c", ".air.toml"]

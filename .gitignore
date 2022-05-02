@@ -17,3 +17,6 @@
 .idea/
 
 access.log
+
+db/
+tmp/
