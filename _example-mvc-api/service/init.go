@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"github.com/go-gorp/gorp"
+	"github.com/joho/godotenv"
 	"go-iris-sample/_example-mvc-api/model"
 	"log"
 	"os"
@@ -11,25 +12,49 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func initDb() *gorp.DbMap {
-	dbUserName := "iris"
-	dbPassWord := "root"
-	dbHost := "localhost"
-	dbPort := "3306"
-	dbDbName := "go_iris_database"
+// InitDb gorp初期化処理
+func (s *UserService) InitDb() *gorp.DbMap {
+	// .env ファイルの読み込み
+	err := s.loadEnv()
+	if err != nil {
+		fmt.Printf(".env ファイルの読み込みに失敗しました: %v\n", err)
+	}
+
+	dbUserName := os.Getenv("DB_USERNAME")
+	dbPassWord := os.Getenv("DB_PASSWORD")
+	dbHost := os.Getenv("DB_HOST")
+	dbPort := os.Getenv("DB_PORT")
+	dbDbName := os.Getenv("DB_DATABASE")
+	// SQL ドライバとの接続
 	db, err := sql.Open("mysql", fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?parseTime=true", dbUserName, dbPassWord, dbHost, dbPort, dbDbName))
 	if err != nil {
 		fmt.Printf("error! can't open sql driver %v", err)
 	}
 
-	dbMap := &gorp.DbMap{Db: db, Dialect: gorp.MySQLDialect{Engine: "InnoDB", Encoding: "utf8-mb4"}}
+	dbmap := &gorp.DbMap{Db: db, Dialect: gorp.MySQLDialect{"InnoDB", "utf8mb4"}}
 
-	dbMap.AddTableWithName(model.User{}, "user").SetKeys(true, "Id")
-	err = dbMap.CreateTablesIfNotExists()
+	// users テーブルの作成
+	dbmap.AddTableWithName(model.User{}, "users").
+		SetKeys(true, "id").
+		SetKeys(false, "name").
+		SetKeys(false, "age")
+	err = dbmap.CreateTablesIfNotExists()
 	if err != nil {
 		fmt.Printf("error! %v", err)
 	}
-	dbMap.TraceOn("[gorp]", log.New(os.Stdout, "go_iris_sample:", log.Lmicroseconds))
 
-	return dbMap
+	//ログの収集
+	dbmap.TraceOn("[gorp]", log.New(os.Stdout, "go-iris-sample:", log.Lmicroseconds))
+
+	return dbmap
+}
+
+// .envファイル内の設定を取得する
+func (s *UserService) loadEnv() error {
+	// .envファイル全体からDB設定を読み込む
+	err := godotenv.Load(".env")
+	if err != nil {
+		return err
+	}
+	return nil
 }

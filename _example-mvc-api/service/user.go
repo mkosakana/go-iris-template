@@ -2,21 +2,20 @@ package service
 
 import (
 	"fmt"
-	"go-iris-sample/_example-mvc-api/model"
-
 	_ "github.com/go-sql-driver/mysql"
+	"go-iris-sample/_example-mvc-api/model"
 )
 
 type UserService struct {}
 
-func (UserService) GetUserList() ([]model.User, error) {
-	dbMap := initDb()
-
-	fmt.Println(456)
-
-	var users []model.User
+func (s UserService) GetUserList() ([]model.User, error) {
+	// initialize the DbMap
+	dbMap := s.InitDb()
+	defer dbMap.Db.Close()
 
 	// ユーザーを全取得
+	var users []model.User
+
 	_, err := dbMap.Select(&users, `SELECT * FROM users`)
 	if err != nil {
 		return []model.User{}, err
@@ -25,8 +24,10 @@ func (UserService) GetUserList() ([]model.User, error) {
 	return users, nil
 }
 
-func (UserService) CreateUser(user *model.User) error {
-	dbMap := initDb()
+func (s UserService) CreateUser(user *model.User) error {
+	// initialize the DbMap
+	dbMap := s.InitDb()
+	defer dbMap.Db.Close()
 
 	// トランザクションを走らせながらinsert
 	tx, _ := dbMap.Begin()
@@ -42,32 +43,70 @@ func (UserService) CreateUser(user *model.User) error {
 	return nil
 }
 
-func (UserService) UpdateUser(user *model.User) error {
-	dbMap := initDb()
+func (s UserService) UpdateUser(id int, user *model.User) error {
+	// initialize the DbMap
+	dbMap := s.InitDb()
+	defer dbMap.Db.Close()
 
 	// トランザクションを走らせながらupdate
 	tx, _ := dbMap.Begin()
 
-	_, err := tx.Update(user)
+	_, err := tx.Exec(
+		`UPDATE
+					users
+				SET
+					name = :name,
+					age = :age
+				WHERE
+					id = :id`,
+		map[string]interface{}{
+			"name": user.Name,
+			"age": user.Age,
+			"id": id,
+		})
 	if err != nil {
 		tx.Rollback()
 		return err
 	}
+
+	tx.Commit()
 
 	return nil
 }
 
-func (UserService) DeleteUser(id string) error {
-	dbMap := initDb()
+func (s UserService) DeleteUser(id int) error {
+	// initialize the DbMap
+	dbMap := s.InitDb()
+	defer dbMap.Db.Close()
+
+	// id から削除するユーザーを取得
+	var user model.User
+
+	err := dbMap.SelectOne(&user,
+		`SELECT
+					*
+				FROM
+					users
+				WHERE
+					id = :id`,
+		map[string]interface{}{
+			"id": id,
+		})
+	if err != nil {
+		fmt.Printf("error! can't find user by id: %v.\n", id)
+		return err
+	}
 
 	// トランザクションを走らせながらdelete
 	tx, _ := dbMap.Begin()
 
-	_, err := tx.Delete(id)
+	_, err = tx.Delete(&user)
 	if err != nil {
 		tx.Rollback()
 		return err
 	}
+
+	tx.Commit()
 
 	return nil
 }

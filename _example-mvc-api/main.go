@@ -25,7 +25,7 @@ func main() {
 	// 静的ファイルの指定
 	app.HandleDir("/", iris.Dir("./_example-mvc-api/public"))
 
-	// GET: "http://localhost:8080/"
+	// GET: "http://localhost:8080/ping"
 	app.Handle("GET", "/ping", ping)
 
 	// "/users/"から始まるURLを受け取った際の処理をグループ化

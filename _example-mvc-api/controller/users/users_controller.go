@@ -1,7 +1,6 @@
 package users
 
 import (
-	"fmt"
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/mvc"
 	"go-iris-sample/_example-mvc-api/model"
@@ -9,25 +8,26 @@ import (
 )
 
 type UsersController struct {
-	Ctx iris.Context
+	UserService service.UserService
+	Ctx         iris.Context
 }
 
-var userService service.UserService
-
-// メソッド名でパスの違いを受け付けます（超便利）
-// GetList()       "http://localhost:8080/users/list"
-// Post()          "http://localhost:8080/users"
-// PutDetails()    "http://localhost:8080/users/details/{id:string}"
-// DeleteDetails() "http://localhost:8080/users/details/{id:string}"
+// メソッド名でパスの違い・リクエストメソッド・パラメータを受け付けます（超便利）
+// [例]
+// GetList()                GET: "http://localhost:8080/users/list"
+// Post()                   POST: "http://localhost:8080/users"
+// PutDetails()             PUT: "http://localhost:8080/users/details"
+// PutDetailsBy(id uint)    PUT: "http://localhost:8080/users/details/{id:int}"
+// DeleteDetails()          DELETE: "http://localhost:8080/users/details"
+// DeleteDetailsBy(id uint) DELETE: "http://localhost:8080/users/details/{id:int}"
 // [その他の例]
 // POST: http://localhost:8080/users/details/example -> PostDetailsExample()
 // PUT: http://localhost:8080/users -> Put()
 
 func (c *UsersController) GetList() mvc.Response {
 	// 一覧取得
-	users, err := userService.GetUserList()
+	users, err := c.UserService.GetUserList()
 	if err != nil {
-		fmt.Println(123)
 		return mvc.Response{
 			Code: iris.StatusInternalServerError,  // エラーハンドリング
 		}
@@ -41,9 +41,8 @@ func (c *UsersController) GetList() mvc.Response {
 }
 
 func (c *UsersController) Post() mvc.Response {
-	var user model.User
-
 	// リクエストボディのjsonデータを構造体（struct）に格納する
+	var user model.User
 	err := c.Ctx.ReadJSON(&user)
 
 	// エラーハンドリング（Iris 備え付きのもので作れます）
@@ -55,22 +54,20 @@ func (c *UsersController) Post() mvc.Response {
 	}
 
 	// 新規作成
-	err = userService.CreateUser(&user)
+	err = c.UserService.CreateUser(&user)
 	if err != nil {
-		_, _ = c.Ctx.WriteString("ping")
 		return mvc.Response{
 			Code: iris.StatusInternalServerError,  // エラーハンドリング
 		}
 	}
 
-	// Iris に備え付きのレスポンス用構造体（struct）
+	// Iris 備え付きのレスポンス用構造体（struct）
 	return mvc.Response{ Code: iris.StatusCreated }
 }
 
-func (c *UsersController) PutDetails() mvc.Response {
-	var user model.User
-
+func (c *UsersController) PutDetailsBy(id int) mvc.Response {
 	// リクエストボディのjsonデータを構造体（struct）に格納する
+	var user model.User
 	err := c.Ctx.ReadJSON(&user)
 
 	// エラーハンドリング（Iris 備え付きのもので作れます）
@@ -81,34 +78,27 @@ func (c *UsersController) PutDetails() mvc.Response {
 		}
 	}
 
-	// URLからパラメーター("id")を取得
-	id := c.Ctx.Params().Get("id")
-	user.Id = id
-
 	// 更新
-	err = userService.UpdateUser(&user)
+	err = c.UserService.UpdateUser(id, &user)
 	if err != nil {
 		return mvc.Response{
 			Code: iris.StatusInternalServerError,  // エラーハンドリング
 		}
 	}
 
-	// Iris に備え付きのレスポンス用構造体（struct）
-	return mvc.Response{ Code: iris.StatusCreated }
+	// Iris 備え付きのレスポンス用構造体（struct）
+	return mvc.Response{ Code: iris.StatusOK }
 }
 
-func (c *UsersController) DeleteDetails() mvc.Response {
-	// URLからパラメーター("id")を取得
-	id := c.Ctx.Params().Get("id")
-
+func (c *UsersController) DeleteDetailsBy(id int) mvc.Response {
 	// 削除
-	err := userService.DeleteUser(id)
+	err := c.UserService.DeleteUser(id)
 	if err != nil {
 		return mvc.Response{
 			Code: iris.StatusInternalServerError,  // エラーハンドリング
 		}
 	}
 
-	// Iris に備え付きのレスポンス用構造体（struct）
-	return mvc.Response{ Code: iris.StatusCreated }
+	// Iris 備え付きのレスポンス用構造体（struct）
+	return mvc.Response{ Code: iris.StatusOK }
 }
