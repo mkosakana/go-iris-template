@@ -5,7 +5,6 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile
-    command: /bin/sh -c "go run _example-mvc-api/main.go"
     stdin_open: true
     tty: true
     volumes:
@@ -14,22 +13,23 @@ services:
       - 8080:8080
     depends_on:
       - "db"
+    environment:
+      DB_CONNECTION: ${DB_CONNECTION}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
 
   db:
-    image: mysql:8.0
+    image: mysql:8.0.26
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: go_iris_database
-      MYSQL_USER: iris
-      MYSQL_PASSWORD: dfwfnoij
-      TZ: 'Asia/Tokyo'
-    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
-    volumes:
-      - db-data:/var/lib/mysql
-      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:
-      - 3306:3306
-
-volumes:
-  db-data:
-    driver: local
+      - "3306:3306"
+    volumes:
+      - ./db/mysql_init:/docker-entrypoint-initdb.d
+      - ./db/mysql_data:/var/lib/mysql
+    cap_add:
+      - SYS_NICE
