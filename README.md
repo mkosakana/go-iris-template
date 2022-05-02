@@ -33,7 +33,7 @@ $ make install
 ## 🐲 Get Start
 
 ### Route1: Without Docker
-only be able to use `/_example-basic-api` or `/_example-basic-view`, because they have NO Data Base connection
+Only be able to use `/_example-basic-api` or `/_example-basic-view`, because they have NO Data Base connection.
 
 ```shell
 go-iris-sample $ cd _example-basic-api/ or _example-basic-view/
@@ -43,10 +43,12 @@ $ go run main.go
 
 ### Route2: With Docker (Data Base connection ✨）
 
-1. `.air.toml` ファイル内 `cmd = "go build -o ./tmp/main ./_example-mvc-api/main.go"` の，
-`"./_example-mvc-api/main.go"` で指定されたディレクトリがコンテナとして立ち上がる（デフォルトでは「_example-mvc-api」）ため，**「_example-mvc-api」** の箇所を Docker を使って作業したいディレクトリ名に置換する．
+1. 立ち上げるコンテナの指定
+`.air.toml` ファイル内 `cmd = "go build -o ./tmp/main ./_example-mvc-api/main.go"` の，
+`"./_example-mvc-api/main.go"` で指定されたディレクトリ（デフォルトでは「_example-mvc-api」）がコンテナとして立ち上がるため，
+**「_example-mvc-api」** の箇所を Docker を使って作業したいディレクトリ名に置換する．
 
-4. start Docker.
+4. start Docker
 
 ```shell
 $ cd go-iris-sample
