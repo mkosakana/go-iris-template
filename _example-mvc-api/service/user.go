@@ -48,10 +48,28 @@ func (s UserService) UpdateUser(id int, user *model.User) error {
 	dbMap := s.InitDb()
 	defer dbMap.Db.Close()
 
+	// id からユーザーが実在するか確認する
+	var isExistUser model.User
+
+	err := dbMap.SelectOne(&isExistUser,
+		`SELECT
+					*
+				FROM
+					users
+				WHERE
+					id = :id`,
+		map[string]interface{}{
+			"id": id,
+		})
+	if err != nil {
+		fmt.Printf("error! can't find user by id: %v.\n", id)
+		return err
+	}
+
 	// トランザクションを走らせながらupdate
 	tx, _ := dbMap.Begin()
 
-	_, err := tx.Exec(
+	_, err = tx.Exec(
 		`UPDATE
 					users
 				SET
