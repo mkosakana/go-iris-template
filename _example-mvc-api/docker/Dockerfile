@@ -19,7 +19,9 @@ RUN apk update && apk add git
 
 # go.mod パッケージのインストール
 RUN go get github.com/cosmtrek/air@v1.29.0
+RUN go mod tidy -compat=1.17
 RUN go mod download
+RUN go mod vendor
 
 # ホットリロードの感知
 CMD ["air", "-c", ".air.toml"]

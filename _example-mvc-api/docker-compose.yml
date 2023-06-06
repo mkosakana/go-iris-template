@@ -7,8 +7,6 @@ services:
       dockerfile: docker/Dockerfile
     stdin_open: true
     tty: true
-    volumes:
-      - .:/go/src/go-iris-sample
     ports:
       - 8080:8080
     depends_on:

@@ -8,7 +8,7 @@ tmp_dir = "tmp"
 [build]
 # 以下コマンド内の，"./_example-mvc-api/main.go" で指定されたディレクトリに（デフォルトでは「_example-mvc-api」）ホットリロードがかかります
 # 「_example-mvc-api」の箇所を Docker を使って作業したいディレクトリ名にご自由に変えてお使いください．
-cmd = "go build -o ./tmp/main ./_example-mvc-api/main.go"
+cmd = "go build -o ./tmp/main ./main.go"
 # Binary file yields from `cmd`.
 bin = "tmp/main"
 # Customize binary, can setup environment variables when run your app.
