@@ -4,13 +4,13 @@ import (
 	"github.com/kataras/iris/v12"
 )
 
-func main()  {
+func main() {
 	app := iris.New()
 
 	// "views" ディレクトリ配下の.htmlファイルを返却するように設定
 	// 上書きされバグが潜む可能性があるため基本的には一度だけ設定するようにし，
 	// 指定したディレクトリ（今回は"views"）配下にディレクトリを増やしていくようにする
-	app.RegisterView(iris.HTML("_example-basic-view/views", ".html"))
+	app.RegisterView(iris.HTML("./views", ".html"))
 
 	// GET: "/"
 	app.Get("/", func(ctx iris.Context) {
@@ -32,7 +32,7 @@ func main()  {
 			ctx.View("/books/purchase.html")
 		})
 	}
-	
+
 	// ポートの指定
 	app.Listen(":8080")
 }
