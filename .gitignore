@@ -18,5 +18,7 @@
 
 access.log
 
-db/
-tmp/
+./_example-mvc-api/.env
+./_example-mvc-api/vendor
+./_example-mvc-api/db
+

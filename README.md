@@ -1,77 +1,60 @@
 # 🦸🏼‍♂️ go-iris-sample
 
-[Iris](https://github.com/kataras/iris) （Go言語フレームワーク）の使い方参考用テンプレートリポジトリ  
+
+[Iris](https://github.com/kataras/iris) （Go言語フレームワーク）の使い方の参考用サンプルプロジェクト
+
+<br>
+
+📢 プロジェクト内で使用されている、
+
+ - 変数
+ - メソッド
+ - ディレクトリ構造
+ - ファイル
+ - DB構造
+ - その他諸々...
+
+について、ご自由に変更してお使いください。
 
 
-### 📢 announce
 
-あくまでIrisの使い方を"参考"するためのリポジトリであり，ディレクトリ内で使用されている
+## 🎟 インストール
 
-- 変数
-- メソッド
-- ディレクトリ構造
-- ファイル
-- その他諸々...
-
-について，ご自由に変更してお使いください
-
-
-
-## 🎟 Install
-
-### 1. Download [golang](https://go.dev)
-
-### 2. Clone this repository on your working directory
+ 1. [Go](https://go.dev) をインストールする
+ 2. 本プロジェクトをクローンする
 
 ```shell
 $ cd $WORK_DIR
 $ git clone https://github.com/mkosakana/go-iris-sample.git
 $ cd go-iris-sample
-$ make install
 ```
 
 
+## 🐲 使用方法
 
-## 🐲 Get Start
-
-
-### Route 1 : Without Docker
-
-Only be able to use `/_example-basic-api` or `/_example-basic-view`, because they have NO Data Base connection.
+### ・`/_example-basic-api`
 
 ```shell
-go-iris-sample $ cd _example-basic-api/ or _example-basic-view/
-$ go run main.go
+    go-iris-sample $ cd _example-basic-api
+_example-basic-api $ go mod tidy -compat=1.17 && go mod download
+_example-basic-api $ go run main.go
 ```
 
-
-### Route 2 : With Docker (Data Base connection ✨）
-
-#### 1. 立ち上げるコンテナの指定  
-
-`.air.toml` ファイル内 `cmd = "go build -o ./tmp/main ./_example-mvc-api/main.go"` の，  
-`"./_example-mvc-api/main.go"` で指定されたディレクトリ（デフォルトでは「_example-mvc-api」）がコンテナとして立ち上がるため，  
-**「_example-mvc-api」** の箇所を Docker を使って作業したいディレクトリ名に置換する．
-
-#### 2. start Docker
+### ・`/_example-basic-view`
 
 ```shell
-$ cd go-iris-sample
-
-// 1. docker-composeからイメージのビルド
-$ make build
-
-// 2. コンテナー・DBをバックグラウンドで立ち上げ
-$ make up
+     go-iris-sample $ cd _example-basic-view
+_example-basic-view $ go mod tidy -compat=1.17 && go mod download
+_example-basic-view $ go run main.go
 ```
 
+### ・`/_example-mvc-api`
 
+```shell
+  go-iris-sample $ _example-mvc-api
+_example-mvc-api $ make build
+_example-mvc-api $ make up
+```
 
-## 🐍 TODO
- - [x] make Docker environment
- - [x] DB connection
- - [x] test - `/_example-basic-api`
- - [x] test - `/_example-basic-view`
- - [ ] test - `/_example-mvc-api`
-
-
+> ⚠️ Dockerが立ち上がったら、`docker-compose.yml` や `.env` などの内容を参考に、既存のエンドポイントに必要な「users」テーブルを作成してください。 
+>    カラムは、「id（primary_key）」「name」「age」があれば問題ありません。
