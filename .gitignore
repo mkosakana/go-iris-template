@@ -16,9 +16,6 @@
 
 .idea/
 
-access.log
-
-./_example-mvc-api/.env
-./_example-mvc-api/vendor
-./_example-mvc-api/db
-
+_example-mvc-api/.env
+_example-mvc-api/vendor
+_example-mvc-api/db
