@@ -2,9 +2,8 @@ package main
 
 import (
 	"github.com/kataras/iris/v12"
-	"testing"
-
 	"github.com/kataras/iris/v12/httptest"
+	"testing"
 )
 
 func TestApp(t *testing.T) {
