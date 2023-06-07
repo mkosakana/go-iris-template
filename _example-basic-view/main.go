@@ -17,7 +17,10 @@ func main() {
 		// ファイル内で使用する変数の設定
 		ctx.ViewData("message", "Hello world!")
 		// 返却するviewファイルの指定
-		ctx.View("index.html")
+		err := ctx.View("index.html")
+		if err != nil {
+			return
+		}
 	})
 
 	// "/books/"から始まるパスを受け取る処理をグループ化
