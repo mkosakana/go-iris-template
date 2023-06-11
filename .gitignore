@@ -21,5 +21,7 @@ _example-mvc-api/vendor
 _example-mvc-api/db
 _example-mvc-api/db/mysql_init
 _example-mvc-api/db/mysql_data
+_example-mvc-api/access.log
+_example-mvc-api/tmp
 
 .go-version
