@@ -1,14 +1,4 @@
-FROM golang:1.17-alpine
-
-# appディレクトリの作成
-RUN mkdir /go/src/go-iris-sample
-
-# copy source
-COPY .. /go/src/go-iris-sample/
-COPY .. /usr/local/go/src/
-
-# ワーキングディレクトリの設定
-WORKDIR /go/src/go-iris-sample
+FROM golang:1.20-alpine
 
 # Environment
 ENV LANG C.UTF-8
@@ -17,9 +7,13 @@ ENV TZ Asia/Tokyo
 # package update
 RUN apk update && apk add git
 
+# copy source
+WORKDIR /go/src/go-iris-sample
+COPY .. .
+
 # go.mod パッケージのインストール
-RUN go get github.com/cosmtrek/air@v1.29.0
-RUN go mod tidy -compat=1.17
+RUN go install github.com/cosmtrek/air@latest
+RUN go mod tidy -go=1.20
 RUN go mod download
 RUN go mod vendor
 
