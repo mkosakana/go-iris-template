@@ -15,7 +15,6 @@ COPY .. .
 RUN go install github.com/cosmtrek/air@latest
 RUN go mod tidy -go=1.20
 RUN go mod download
-RUN go mod vendor
 
 # ホットリロードの感知
 CMD ["air", "-c", ".air.toml"]
