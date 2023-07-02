@@ -12,22 +12,23 @@ import (
 func main() {
 	app := iris.New()
 
-	// 備え付きミドルウェアの使用
+	// ミドルウェアの使用
 	app.Use(iris.Compression)
 	app.Configure(iris.WithoutBodyConsumptionOnUnmarshal)
+
+	// ログ記録（これも備え付きミドルウェア）
 	ac := accesslog.File("./access.log")
 	defer ac.Close()
 	app.UseRouter(ac.Handler)
 	app.UseRouter(recover.New())
 
 	// 静的ファイルの指定
-	app.HandleDir("/", iris.Dir("./public"))
+	app.HandleDir("/", iris.Dir("./_example-mvc-api/public"))
 
-	// ヘルスチェック
 	// GET: "http://localhost:8080/ping"
 	app.Handle("GET", "/ping", ping)
 
-	// "/users"から始まるURLを受け取った際の処理をグループ化
+	// "/users/"から始まるURLを受け取った際の処理をグループ化
 	users := app.Party("/users")
 	mvc.Configure(users, setups.ConfigureUsersControllers)
 
@@ -35,6 +36,8 @@ func main() {
 	app.Listen(":8080")
 }
 
+// サーバーが動いているかどうかの確認
 func ping(ctx iris.Context) {
+	// "ping"が返る
 	_, _ = ctx.WriteString("ping")
 }
