@@ -6,9 +6,7 @@ root = "."
 tmp_dir = "tmp"
 
 [build]
-# 以下コマンド内の，"./_example-mvc-api/main.go" で指定されたディレクトリに（デフォルトでは「_example-mvc-api」）ホットリロードがかかります
-# 「_example-mvc-api」の箇所を Docker を使って作業したいディレクトリ名にご自由に変えてお使いください．
-cmd = "go build -o ./tmp/main ./_example-mvc-api/main.go"
+cmd = "go build -o ./tmp/main ."
 # Binary file yields from `cmd`.
 bin = "tmp/main"
 # Customize binary, can setup environment variables when run your app.
@@ -19,8 +17,7 @@ include_ext = ["go", "html"]
 exclude_dir = ["db", "tmp", "docker"]
 # Watch these directories if you specified.
 include_dir = []
-# Exclude files.
-exclude_file = []
+exclude_regex = ["_test.go"]
 # This log file places in your tmp_dir.
 log = "air.log"
 # It's not necessary to trigger build each time file changes if it's too frequent.
