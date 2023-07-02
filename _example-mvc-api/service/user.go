@@ -6,14 +6,14 @@ import (
 	"go-iris-sample/_example-mvc-api/model"
 )
 
-type UserService struct {}
+// UserService ユーザーサービス
+type UserService struct{}
 
+// GetUserList ユーザー一覧取得
 func (s UserService) GetUserList() ([]model.User, error) {
-	// initialize the DbMap
 	dbMap := s.InitDb()
 	defer dbMap.Db.Close()
 
-	// ユーザーを全取得
 	var users []model.User
 
 	_, err := dbMap.Select(&users, `SELECT * FROM users`)
@@ -24,12 +24,12 @@ func (s UserService) GetUserList() ([]model.User, error) {
 	return users, nil
 }
 
+// CreateUser ユーザー作成
 func (s UserService) CreateUser(user *model.User) error {
-	// initialize the DbMap
 	dbMap := s.InitDb()
 	defer dbMap.Db.Close()
 
-	// トランザクションを走らせながらinsert
+	// トランザクション開始
 	tx, _ := dbMap.Begin()
 
 	err := tx.Insert(user)
@@ -43,12 +43,11 @@ func (s UserService) CreateUser(user *model.User) error {
 	return nil
 }
 
+// UpdateUser ユーザー更新
 func (s UserService) UpdateUser(id int, user *model.User) error {
-	// initialize the DbMap
 	dbMap := s.InitDb()
 	defer dbMap.Db.Close()
 
-	// id からユーザーが実在するか確認する
 	var isExistUser model.User
 
 	err := dbMap.SelectOne(&isExistUser,
@@ -66,7 +65,7 @@ func (s UserService) UpdateUser(id int, user *model.User) error {
 		return err
 	}
 
-	// トランザクションを走らせながらupdate
+	// トランザクション開始
 	tx, _ := dbMap.Begin()
 
 	_, err = tx.Exec(
@@ -79,8 +78,8 @@ func (s UserService) UpdateUser(id int, user *model.User) error {
 					id = :id`,
 		map[string]interface{}{
 			"name": user.Name,
-			"age": user.Age,
-			"id": id,
+			"age":  user.Age,
+			"id":   id,
 		})
 	if err != nil {
 		tx.Rollback()
@@ -92,12 +91,11 @@ func (s UserService) UpdateUser(id int, user *model.User) error {
 	return nil
 }
 
+// DeleteUser ユーザー削除
 func (s UserService) DeleteUser(id int) error {
-	// initialize the DbMap
 	dbMap := s.InitDb()
 	defer dbMap.Db.Close()
 
-	// id から削除するユーザーを取得
 	var user model.User
 
 	err := dbMap.SelectOne(&user,
@@ -115,7 +113,7 @@ func (s UserService) DeleteUser(id int) error {
 		return err
 	}
 
-	// トランザクションを走らせながらdelete
+	// トランザクション開始
 	tx, _ := dbMap.Begin()
 
 	_, err = tx.Delete(&user)

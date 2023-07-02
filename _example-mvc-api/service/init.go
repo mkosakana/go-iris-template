@@ -13,7 +13,7 @@ import (
 )
 
 // InitDb gorp初期化処理
-func (s *UserService) InitDb() *gorp.DbMap {
+func (s UserService) InitDb() *gorp.DbMap {
 	// .env ファイルの読み込み
 	err := s.loadEnv()
 	if err != nil {
@@ -31,7 +31,7 @@ func (s *UserService) InitDb() *gorp.DbMap {
 		fmt.Printf("error! can't open sql driver %v", err)
 	}
 
-	dbmap := &gorp.DbMap{Db: db, Dialect: gorp.MySQLDialect{"InnoDB", "utf8mb4"}}
+	dbmap := &gorp.DbMap{Db: db, Dialect: gorp.MySQLDialect{Engine: "InnoDB", Encoding: "utf8mb4"}}
 
 	// users テーブルの作成
 	dbmap.AddTableWithName(model.User{}, "users").
@@ -43,15 +43,14 @@ func (s *UserService) InitDb() *gorp.DbMap {
 		fmt.Printf("error! %v", err)
 	}
 
-	//ログの収集
+	// ログの収集
 	dbmap.TraceOn("[gorp]", log.New(os.Stdout, "go-iris-sample:", log.Lmicroseconds))
 
 	return dbmap
 }
 
 // .envファイル内の設定を取得する
-func (s *UserService) loadEnv() error {
-	// .envファイル全体からDB設定を読み込む
+func (s UserService) loadEnv() error {
 	err := godotenv.Load(".env")
 	if err != nil {
 		return err
