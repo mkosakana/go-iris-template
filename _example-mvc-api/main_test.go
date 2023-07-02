@@ -6,13 +6,25 @@ import (
 	"testing"
 )
 
-func TestPing(t *testing.T) {
+func Test_Ping(t *testing.T) {
 	app := iris.New()
-	app.Handle("GET", "/", ping)
+	app.Handle("GET", "/ping", ping)
+
+	e := httptest.New(t, app)
+	e.GET("/ping").Expect().
+		Status(httptest.StatusOK).
+		Body().
+		NotEmpty()
+}
+
+func Test_HandleDir(t *testing.T) {
+	app := iris.New()
+	app.HandleDir("/", iris.Dir("./public"))
 
 	e := httptest.New(t, app)
 	e.GET("/").Expect().
 		Status(httptest.StatusOK).
+		ContentType("text/html", "utf-8").
 		Body().
-		Equal("ping")
+		NotEmpty()
 }

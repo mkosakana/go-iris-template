@@ -69,6 +69,7 @@ require (
 	github.com/schollz/closestmatch v2.1.0+incompatible // indirect
 	github.com/sergi/go-diff v1.0.0 // indirect
 	github.com/sirupsen/logrus v1.8.1 // indirect
+	github.com/stretchr/objx v0.5.0 // indirect
 	github.com/tdewolff/minify/v2 v2.12.6 // indirect
 	github.com/tdewolff/parse/v2 v2.6.6 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
