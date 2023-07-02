@@ -13,3 +13,7 @@ down: ## コンテナを停止して削除します。
 .PHONY: ps
 ps: ## コンテナの一覧を表示します。
 	docker-compose ps
+
+generate:
+	find ./_example-mvc-api/service/ -name "mock_*.go" | xargs rm -f
+	go generate ./_example-mvc-api/service
