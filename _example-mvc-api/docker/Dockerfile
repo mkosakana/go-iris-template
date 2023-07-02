@@ -9,7 +9,7 @@ RUN apk update && apk add git
 
 # copy source
 WORKDIR /go/src/go-iris-sample
-COPY .. .
+COPY . .
 
 # go.mod パッケージのインストール
 RUN go install github.com/cosmtrek/air@latest

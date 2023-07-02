@@ -9,6 +9,8 @@ services:
     tty: true
     ports:
       - 8080:8080
+    volumes:
+      - .:/go/src/go-iris-sample
     depends_on:
       - "db"
     environment:
