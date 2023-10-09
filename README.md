@@ -1,12 +1,13 @@
-# 🦸🏼‍♂️ go-iris-template
+# go-iris-template
 
 A sample(reference) template for using [Iris](https://github.com/kataras/iris), a web framework of Go
 
 
-## 🎟 Install
+## Install
 
-1. install [Go](https://go.dev/dl) 
-2. clone this project
+1. Install [Go](https://go.dev/dl) 
+2. Clone Project:
+
 
 ```shell
 $ cd $WORK_DIR
@@ -15,11 +16,11 @@ $ cd go-iris-template
 ```
 
 
-## 🐲 Getting Start
+## Getting Start
 
-#### ・`/_example-basic-view`
+### ・ /_example-basic-view
 
-run
+Run:
 
 ```shell
 $ make setup-views
@@ -31,9 +32,9 @@ or
 $ cd _example-basic-views && make setup
 ```
 
-#### ・`/_example-mvc-api`
+### ・ /_example-mvc-api
 
-run
+Run:
 
 ```shell
 $ make setup-api
