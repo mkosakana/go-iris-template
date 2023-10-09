@@ -1,63 +1,53 @@
-# 🦸🏼‍♂️ go-iris-sample
+# 🦸🏼‍♂️ go-iris-template
+
+This is a sample(reference) template for using [Iris](https://github.com/kataras/iris), a web framework of Go
+- Go
+- Iris
+- Air（hot reload）
+- mysql
+- docker
+- docker-compose
+- Make
 
 
-[Iris](https://github.com/kataras/iris) （Go言語フレームワーク）の使い方の参考用サンプルプロジェクト
+## 🎟 Install
 
-<br>
-
-📢 プロジェクト内で使用されている、
-
- - 変数
- - メソッド
- - ディレクトリ構造
- - ファイル
- - DB構造
- - その他諸々...
-
-について、ご自由に変更してお使いください。
-
-<br>
-
-## 🎟 インストール
-
- 1. [Go](https://go.dev) をインストールする
- 2. 本プロジェクトをクローンする
+ 1. install [Go](https://go.dev/dl) 
+ 2. clone this project
 
 ```shell
 $ cd $WORK_DIR
 $ git clone https://github.com/mkosakana/go-iris-sample.git
-$ cd go-iris-sample
+$ cd go-iris-template
 ```
 
-<br>
 
-## 🐲 使用方法
+## 🐲 Getting Start
 
-### ・`/_example-basic-api`
+#### ・`/_example-basic-view`
+
+run
 
 ```shell
-    go-iris-sample $ cd _example-basic-api
-_example-basic-api $ go mod tidy -compat=1.17 && go mod download
-_example-basic-api $ go run main.go
+$ make setup-views
 ```
 
-### ・`/_example-basic-view`
+or
 
 ```shell
-     go-iris-sample $ cd _example-basic-views
-_example-basic-views $ go mod tidy -compat=1.17 && go mod download
-_example-basic-views $ go run main.go
+$ cd _example-basic-views && make setup
 ```
 
-### ・`/_example-mvc-api`
+#### ・`/_example-mvc-api`
+
+run
 
 ```shell
-  go-iris-sample $ _example-mvc-api
-_example-mvc-api $ make build
-_example-mvc-api $ make up
+$ make setup-api
 ```
 
-<br>
+or
 
-> ⚠️ Dockerが立ち上がったら、`docker-compose.yml` や `.env` などの内容を参考に、既存のエンドポイントに必要な「users」テーブルを作成してください。 
->    カラムは、「id（primary_key）」「name」「age」があれば問題ありません。
+```shell
+$ cd _example-basic-api && make setup
+```
