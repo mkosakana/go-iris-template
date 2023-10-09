@@ -6,18 +6,18 @@ root = "."
 tmp_dir = "tmp"
 
 [build]
-cmd = "go build -o ./tmp/main ."
+cmd = "CGO_ENAMBLED=0 go build -gcflags=all='-N -l' -o ./tmp/main ./cmd/main.go"
 # Binary file yields from `cmd`.
-bin = "tmp/main"
+bin = "./tmp/main"
 # Customize binary, can setup environment variables when run your app.
 full_bin = "APP_ENV=dev APP_USER=air ./tmp/main"
 # Watch these filename extensions.
-include_ext = ["go", "html"]
+include_ext = ["go"]
 # Ignore these filename extensions or directories.
-exclude_dir = ["db", "tmp", "docker"]
+exclude_dir = ["tmp", "docker", "environment"]
 # Watch these directories if you specified.
 include_dir = []
-exclude_regex = ["_test.go"]
+exclude_regex = ["*_test.go"]
 # This log file places in your tmp_dir.
 log = "air.log"
 # It's not necessary to trigger build each time file changes if it's too frequent.

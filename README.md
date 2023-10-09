@@ -44,9 +44,9 @@ _example-basic-api $ go run main.go
 ### ・`/_example-basic-view`
 
 ```shell
-     go-iris-sample $ cd _example-basic-view
-_example-basic-view $ go mod tidy -compat=1.17 && go mod download
-_example-basic-view $ go run main.go
+     go-iris-sample $ cd _example-basic-views
+_example-basic-views $ go mod tidy -compat=1.17 && go mod download
+_example-basic-views $ go run main.go
 ```
 
 ### ・`/_example-mvc-api`
