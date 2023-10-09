@@ -1,20 +1,16 @@
-FROM golang:1.20-alpine
+FROM golang:1.21.2-alpine3.18
 
-# Environment
 ENV LANG C.UTF-8
 ENV TZ Asia/Tokyo
 
-# package update
-RUN apk update && apk add git
+RUN apk update &&\
+    apk add --update git make
 
-# copy source
-WORKDIR /go/src/go-iris-sample
-COPY . .
+WORKDIR /go/src/app
+COPY .. .
 
-# go.mod パッケージのインストール
-RUN go install github.com/cosmtrek/air@latest
-RUN go mod tidy -go=1.20
-RUN go mod download
+RUN go mod download &&\
+    go install github.com/cosmtrek/air@latest
 
-# ホットリロードの感知
+# ホットリロード
 CMD ["air", "-c", ".air.toml"]
