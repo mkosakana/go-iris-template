@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/mkosakana/go-iris-sample/_example-mvc-api/configs/db"
+	"github.com/mkosakana/go-iris-template/_example-mvc-api/configs/db"
 	"github.com/stretchr/testify/assert"
 	"gorm.io/gorm"
 )

@@ -8,7 +8,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	book "github.com/mkosakana/go-iris-sample/_example-mvc-api/model/book"
+	book "github.com/mkosakana/go-iris-template/_example-mvc-api/model/book"
 )
 
 // MockBookServiceInterface is a mock of BookServiceInterface interface.

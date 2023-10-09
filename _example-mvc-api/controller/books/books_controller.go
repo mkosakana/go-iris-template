@@ -3,8 +3,8 @@ package books
 import (
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/mvc"
-	bookModel "github.com/mkosakana/go-iris-sample/_example-mvc-api/model/book"
-	"github.com/mkosakana/go-iris-sample/_example-mvc-api/service/book"
+	bookModel "github.com/mkosakana/go-iris-template/_example-mvc-api/model/book"
+	"github.com/mkosakana/go-iris-template/_example-mvc-api/service/book"
 )
 
 type BooksController struct {

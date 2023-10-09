@@ -1,4 +1,4 @@
-module github.com/mkosakana/go-iris-sample/_example-mvc-api
+module github.com/mkosakana/go-iris-template/_example-mvc-api
 
 go 1.21.2
 
@@ -6,6 +6,7 @@ require (
 	github.com/golang/mock v1.6.0
 	github.com/joho/godotenv v1.5.1
 	github.com/kataras/iris/v12 v12.2.7
+	github.com/stretchr/testify v1.8.4
 	gorm.io/driver/mysql v1.5.1
 	gorm.io/gorm v1.25.4
 )
@@ -66,7 +67,6 @@ require (
 	github.com/schollz/closestmatch v2.1.0+incompatible // indirect
 	github.com/sergi/go-diff v1.0.0 // indirect
 	github.com/sirupsen/logrus v1.8.1 // indirect
-	github.com/stretchr/testify v1.8.4 // indirect
 	github.com/tdewolff/minify/v2 v2.12.9 // indirect
 	github.com/tdewolff/parse/v2 v2.6.8 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect

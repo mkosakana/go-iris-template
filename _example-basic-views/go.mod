@@ -1,4 +1,4 @@
-module github.com/mkosakana/go-iris-sample/_example-basic-views
+module github.com/mkosakana/go-iris-template/_example-basic-views
 
 go 1.21.2
 

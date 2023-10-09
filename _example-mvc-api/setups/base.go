@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/kataras/iris/v12/mvc"
-	"github.com/mkosakana/go-iris-sample/_example-mvc-api/configs/db"
+	"github.com/mkosakana/go-iris-template/_example-mvc-api/configs/db"
 )
 
 func SetBaseConfiguration(app *mvc.Application) {

@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/kataras/iris/v12"
-	"github.com/mkosakana/go-iris-sample/_example-mvc-api/configs"
+	"github.com/mkosakana/go-iris-template/_example-mvc-api/configs"
 )
 
 func main() {
