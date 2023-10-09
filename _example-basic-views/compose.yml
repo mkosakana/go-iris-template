@@ -1,0 +1,12 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    container_name: go-iris-sample-views
+    stdin_open: true
+    tty: true
+    ports:
+      - 8070:8080
+    volumes:
+      - .:/go/src/app
