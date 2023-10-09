@@ -3,7 +3,7 @@
 package book
 
 import (
-	"github.com/mkosakana/go-iris-sample/_example-mvc-api/model/book"
+	"github.com/mkosakana/go-iris-template/_example-mvc-api/model/book"
 )
 
 type BookServiceInterface interface {

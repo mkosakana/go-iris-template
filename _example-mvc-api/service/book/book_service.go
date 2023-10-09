@@ -2,7 +2,7 @@ package book
 
 import (
 	"github.com/kataras/iris/v12/x/errors"
-	"github.com/mkosakana/go-iris-sample/_example-mvc-api/model/book"
+	"github.com/mkosakana/go-iris-template/_example-mvc-api/model/book"
 	"gorm.io/gorm"
 )
 

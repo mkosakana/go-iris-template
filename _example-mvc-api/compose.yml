@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile
-    container_name: go-iris-sample-api
+    container_name: go-iris-template-api
     stdin_open: true
     tty: true
     ports:

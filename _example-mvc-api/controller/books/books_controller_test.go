@@ -6,7 +6,7 @@ import (
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/httptest"
 	"github.com/kataras/iris/v12/mvc"
-	"github.com/mkosakana/go-iris-sample/_example-mvc-api/service/book"
+	"github.com/mkosakana/go-iris-template/_example-mvc-api/service/book"
 )
 
 func TestBooksController_GetList(t *testing.T) {

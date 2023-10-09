@@ -3,7 +3,7 @@ package configs
 import (
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/mvc"
-	"github.com/mkosakana/go-iris-sample/_example-mvc-api/setups"
+	"github.com/mkosakana/go-iris-template/_example-mvc-api/setups"
 )
 
 // SetRoutes routes

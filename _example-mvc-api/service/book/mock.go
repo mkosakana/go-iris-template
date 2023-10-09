@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/golang/mock/gomock"
-	"github.com/mkosakana/go-iris-sample/_example-mvc-api/model/book"
+	"github.com/mkosakana/go-iris-template/_example-mvc-api/model/book"
 )
 
 func GetMockBookService(t *testing.T) *MockBookServiceInterface {
