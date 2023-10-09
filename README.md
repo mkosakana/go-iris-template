@@ -1,19 +1,12 @@
 # 🦸🏼‍♂️ go-iris-template
 
-This is a sample(reference) template for using [Iris](https://github.com/kataras/iris), a web framework of Go
-- Go
-- Iris
-- Air（hot reload）
-- mysql
-- docker
-- docker-compose
-- Make
+A sample(reference) template for using [Iris](https://github.com/kataras/iris), a web framework of Go
 
 
 ## 🎟 Install
 
- 1. install [Go](https://go.dev/dl) 
- 2. clone this project
+1. install [Go](https://go.dev/dl) 
+2. clone this project
 
 ```shell
 $ cd $WORK_DIR
