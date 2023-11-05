@@ -11,7 +11,7 @@ A sample(reference) template for using [Iris](https://github.com/kataras/iris), 
 
 ```shell
 $ cd $WORK_DIR
-$ git clone https://github.com/mkosakana/go-iris-sample.git
+$ git clone https://github.com/mkosakana/go-iris-template.git
 $ cd go-iris-template
 ```
 
