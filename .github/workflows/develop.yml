@@ -35,7 +35,7 @@ jobs:
 
       - name: Get dependencies
         run: |
-          go mod tidy
+          make get_dependencies
 
       - name: Test
         run: |

@@ -10,6 +10,13 @@ setup-views:
 setup-api:
 	cd _example-mvc-api/ && make setup
 
+.PHONY: get_dependencies
+test_for_ci:
+	cd _example-basic-views/ &&\
+	go mod tidy &&\
+	cd ../_example-mvc-api/ &&\
+	go mod tidy
+
 .PHONY: test_for_ci
 test_for_ci:
 	cd _example-basic-views/ &&\

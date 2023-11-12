@@ -9,7 +9,7 @@ RUN apk update &&\
 WORKDIR /go/src/app
 COPY .. .
 
-RUN go mod download &&\
+RUN go mod tidy &&\
     go install github.com/cosmtrek/air@latest
 
 # ホットリロード
