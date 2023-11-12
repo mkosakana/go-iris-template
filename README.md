@@ -1,3 +1,6 @@
+[![Go](https://github.com/mkosakana/go-iris-template/actions/workflows/develop.yml/badge.svg)](https://github.com/mkosakana/go-iris-template/actions/workflows/develop.yml)
+
+
 # go-iris-template
 
 A sample(reference) template for using [Iris](https://github.com/kataras/iris), a web framework of Go
@@ -5,9 +8,8 @@ A sample(reference) template for using [Iris](https://github.com/kataras/iris), 
 
 ## Install
 
-1. Install [Go](https://go.dev/dl) 
-2. Clone Project:
-
+1. Install [Go](https://go.dev/dl)
+2. Clone The Project:
 
 ```shell
 $ cd $WORK_DIR
