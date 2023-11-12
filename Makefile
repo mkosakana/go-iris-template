@@ -11,7 +11,7 @@ setup-api:
 	cd _example-mvc-api/ && make setup
 
 .PHONY: get_dependencies
-test_for_ci:
+get_dependencies:
 	cd _example-basic-views/ &&\
 	go mod tidy &&\
 	cd ../_example-mvc-api/ &&\
