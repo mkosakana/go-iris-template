@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/kataras/iris/v12"
+	recover2 "github.com/kataras/iris/v12/middleware/recover"
 	"github.com/mkosakana/go-iris-template/_example-mvc-api/configs"
 )
 
@@ -12,6 +13,7 @@ func main() {
 
 	// middleware
 	app.Use(iris.Compression)
+	app.UseRouter(recover2.New())
 	app.Configure(iris.WithoutBodyConsumptionOnUnmarshal)
 
 	// routes
